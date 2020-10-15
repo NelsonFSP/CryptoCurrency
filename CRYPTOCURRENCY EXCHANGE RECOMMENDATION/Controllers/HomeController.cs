@@ -19,7 +19,7 @@ namespace CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int ? value)
         {
             List<SelectListItem> items = new List<SelectListItem>();
             SelectListItem item1 = new SelectListItem()
@@ -59,12 +59,16 @@ namespace CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Controllers
                 Selected = false
             };
             items.Add(item1);
-            items.Add(item3);
             items.Add(item2);
             items.Add(item3);
             items.Add(item4);
             items.Add(item5);
             items.Add(item6);
+
+            if (value != null)
+            {
+                items.Where(i => i.Value == value.ToString()).First().Selected = true;
+            }
 
             ViewBag.TradeItems = items;
             return View();
