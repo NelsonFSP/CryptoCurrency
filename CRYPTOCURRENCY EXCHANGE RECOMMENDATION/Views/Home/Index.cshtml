@@ -1,16 +1,19 @@
 ﻿@using CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Models
+
 @{
     ViewBag.Titulo = "Home page";
 }
-@model Trade
 
 
-<div class="text-center">
-    <h1 class="display-4">Crypto currency recomendation</h1>
-    <p></p>
-    <div>
-        @Html.DropDownList("TradeItems",null,new
-        {onchange="document.location.href='/Home/Index?value=' + this.value; "})
-        
+    <div class="text-center">
+        <h1 class="display-4">Crypto currency recomendation</h1>
+        <div>
+            @Html.DropDownList("TradeItems", null, new { onchange = "document.location.href='/Home/Index?value=' + this.value; " })
+            &nbsp;
+            @Html.DropDownList("CoinItems", null, new { onchange = "document.location.href='/Home/Index?value2=' + this.value2; " })
+        </div>
+        <div>
+            
+        </div>         
     </div>
-</div>
+

@@ -7,11 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Controllers.Requisitions;
 
 namespace CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Controllers
 {
     public class HomeController : Controller
     {
+        public APICall apiCall = new APICall();
+
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -19,58 +22,141 @@ namespace CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index(int ? value)
+        public IActionResult Index(int ? value, int ? value2)
         {
-            List<SelectListItem> items = new List<SelectListItem>();
-            SelectListItem item1 = new SelectListItem()
-            {
-                Text = "Bitcoin",
-                Value = "1",
-                Selected = true
+            List<SelectListItem> tradeitems = new List<SelectListItem> {
+                new SelectListItem()
+                    {
+                        Text = "Bitcoin",
+                    Value = "1",
+                    Selected = true
+                },
+                new SelectListItem()
+                    {
+                        Text = "Ethereum",
+                        Value = "2",
+                        Selected = false
+                    },
+                new SelectListItem()
+                    {
+                        Text = "Classic Ethereum",
+                        Value = "3",
+                        Selected = false
+                    },
+                new SelectListItem()
+                    {
+                        Text = "Monero",
+                        Value = "4",
+                        Selected = false
+                    },
+                new SelectListItem()
+                    {
+                        Text = "Zcash",
+                        Value = "5",
+                        Selected = false
+                    },
+                new SelectListItem()
+                    {
+                        Text = "Bitcoin cash",
+                        Value = "6",
+                        Selected = false
+                    }
             };
-            SelectListItem item2 = new SelectListItem()
-            {
-                Text = "Ethereum",
-                Value = "2",
-                Selected = false
+                   
+            List<SelectListItem> CoinItems = new List<SelectListItem> {
+                new SelectListItem()
+                    {
+                        Text = "Bitcoin",
+                    Value = "1",
+                    Selected = true
+                },
+                new SelectListItem()
+                    {
+                        Text = "Ethereum",
+                        Value = "2",
+                        Selected = false
+                    },
+                new SelectListItem()
+                    {
+                        Text = "Classic Ethereum",
+                        Value = "3",
+                        Selected = false
+                    },
+                new SelectListItem()
+                    {
+                        Text = "Monero",
+                        Value = "4",
+                        Selected = false
+                    },
+                new SelectListItem()
+                    {
+                        Text = "Zcash",
+                        Value = "5",
+                        Selected = false
+                    },
+                new SelectListItem()
+                    {
+                        Text = "Bitcoin cash",
+                        Value = "6",
+                        Selected = false
+                    }
             };
-            SelectListItem item3 = new SelectListItem()
-            {
-                Text = "Classic Ethereum",
-                Value = "3",
-                Selected = false
-            };
-            SelectListItem item4 = new SelectListItem()
-            {
-                Text = "Monero",
-                Value = "4",
-                Selected = false
-            };
-            SelectListItem item5 = new SelectListItem()
-            {
-                Text = "Zcash",
-                Value = "5",
-                Selected = false
-            };
-            SelectListItem item6 = new SelectListItem()
-            {
-                Text = "Bitcoin cash",
-                Value = "6",
-                Selected = false
-            };
-            items.Add(item1);
-            items.Add(item2);
-            items.Add(item3);
-            items.Add(item4);
-            items.Add(item5);
-            items.Add(item6);
+
+            ViewBag.TradeItems = tradeitems;
+            ViewBag.CoinItems = CoinItems;
 
             if (value != null)
             {
-                items.Where(i => i.Value == value.ToString()).First().Selected = true;
+                switch (Convert.ToInt32(value))
+                {
+                    case 1:
+                        apiCall.getName1(1);
+                        break;
+                    case 2:
+                        apiCall.getName1(2);
+                        break;
+                    case 3:
+                        apiCall.getName1(3);
+                        break;
+                    case 4:
+                        apiCall.getName1(4);
+                        break;
+
+                    case 5:
+                        apiCall.getName1(5);
+                        break;
+                    case 6:
+                        apiCall.getName1(6);
+                        break;
+                }
+            }
+            if (value2 != null)
+            {
+                switch (Convert.ToInt32(value))
+                {
+                    case 1:
+                        apiCall.getName2(1);
+                        break;
+                    case 2:
+                        apiCall.getName2(2);
+                        break;
+                    case 3:
+                        apiCall.getName2(3);
+                        break;
+                    case 4:
+                        apiCall.getName2(4);
+                        break;
+
+                    case 5:
+                        apiCall.getName2(5);
+                        break;
+                    case 6:
+                        apiCall.getName2(6);
+                        break;
+                }
             }
 
-            ViewBag.TradeItems = items;
+            Console.WriteLine();
             return View();
         }
 
