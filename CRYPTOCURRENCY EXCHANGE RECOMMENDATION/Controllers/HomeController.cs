@@ -24,89 +24,20 @@ namespace CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Controllers
 
         public IActionResult Index(int ? value, int ? value2)
         {
-            List<SelectListItem> tradeitems = new List<SelectListItem> {
-                new SelectListItem()
-                    {
-                        Text = "Bitcoin",
-                    Value = "1",
-                    Selected = true
-                },
-                new SelectListItem()
-                    {
-                        Text = "Ethereum",
-                        Value = "2",
-                        Selected = false
-                    },
-                new SelectListItem()
-                    {
-                        Text = "Classic Ethereum",
-                        Value = "3",
-                        Selected = false
-                    },
-                new SelectListItem()
-                    {
-                        Text = "Monero",
-                        Value = "4",
-                        Selected = false
-                    },
-                new SelectListItem()
-                    {
-                        Text = "Zcash",
-                        Value = "5",
-                        Selected = false
-                    },
-                new SelectListItem()
-                    {
-                        Text = "Bitcoin cash",
-                        Value = "6",
-                        Selected = false
-                    }
-            };
-                   
-            List<SelectListItem> CoinItems = new List<SelectListItem> {
-                new SelectListItem()
-                    {
-                        Text = "Bitcoin",
-                    Value = "1",
-                    Selected = true
-                },
-                new SelectListItem()
-                    {
-                        Text = "Ethereum",
-                        Value = "2",
-                        Selected = false
-                    },
-                new SelectListItem()
-                    {
-                        Text = "Classic Ethereum",
-                        Value = "3",
-                        Selected = false
-                    },
-                new SelectListItem()
-                    {
-                        Text = "Monero",
-                        Value = "4",
-                        Selected = false
-                    },
-                new SelectListItem()
-                    {
-                        Text = "Zcash",
-                        Value = "5",
-                        Selected = false
-                    },
-                new SelectListItem()
-                    {
-                        Text = "Bitcoin cash",
-                        Value = "6",
-                        Selected = false
-                    }
-            };
+            Junction junction = new Junction();
+
+            List<FirstSegregation> tradeitems = new List<FirstSegregation>();
+            List<SecondSegregation> coinItems = new List<SecondSegregation>();
+
+            tradeitems = junction.First;
 
             ViewBag.TradeItems = tradeitems;
-            ViewBag.CoinItems = CoinItems;
+            ViewBag.CoinItems = coinItems;
 
             if (value != null)
             {
+                tradeitems.Where(i => i.Value == value.ToString()).First().Selected = true;
+
                 switch (Convert.ToInt32(value))
                 {
                     case 1:
@@ -132,7 +63,9 @@ namespace CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Controllers
             }
             if (value2 != null)
             {
-                switch (Convert.ToInt32(value))
+                coinItems.Where(f => f.Value == value2.ToString()).First().Selected = true;
+
+                switch (Convert.ToInt32(value2))
                 {
                     case 1:
                         apiCall.getName2(1);
@@ -156,7 +89,6 @@ namespace CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Controllers
                 }
             }
 
-            Console.WriteLine();
             return View();
         }
 
