@@ -14,7 +14,8 @@ namespace CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Controllers
     public class HomeController : Controller
     {
         public APICall apiCall = new APICall();
-
+        public ExchangeClass exchangeClass = new ExchangeClass();
+        
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -22,74 +23,36 @@ namespace CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index(int ? value, int ? value2)
+        public IActionResult Index(string? value)
         {
-            Junction junction = new Junction();
+            ViewBag.TradeItems = new SelectList(exchangeClass.ListItems().AsEnumerable());
+            ViewBag.CoinItems = new SelectList(exchangeClass.ListItems());
 
-            List<FirstSegregation> tradeitems = new List<FirstSegregation>();
-            List<SecondSegregation> coinItems = new List<SecondSegregation>();
+            
 
-            tradeitems = junction.First;
+            if (value != null){
+                Chamada(value);
+            }
+            else
+            {
+                Chamada(null);
+            }
+            return View();
+        }
 
-            ViewBag.TradeItems = tradeitems;
-            ViewBag.CoinItems = coinItems;
-
+        [Microsoft.JSInterop.JSInvokable]
+        public static bool Chamada(string value)
+        {
             if (value != null)
             {
-                tradeitems.Where(i => i.Value == value.ToString()).First().Selected = true;
-
-                switch (Convert.ToInt32(value))
-                {
-                    case 1:
-                        apiCall.getName1(1);
-                        break;
-                    case 2:
-                        apiCall.getName1(2);
-                        break;
-                    case 3:
-                        apiCall.getName1(3);
-                        break;
-                    case 4:
-                        apiCall.getName1(4);
-                        break;
-
-                    case 5:
-                        apiCall.getName1(5);
-                        break;
-                    case 6:
-                        apiCall.getName1(6);
-                        break;
-                }
+                Console.WriteLine(value + "Sucesso");
+                return true;
             }
-            if (value2 != null)
+            else
             {
-                coinItems.Where(f => f.Value == value2.ToString()).First().Selected = true;
-
-                switch (Convert.ToInt32(value2))
-                {
-                    case 1:
-                        apiCall.getName2(1);
-                        break;
-                    case 2:
-                        apiCall.getName2(2);
-                        break;
-                    case 3:
-                        apiCall.getName2(3);
-                        break;
-                    case 4:
-                        apiCall.getName2(4);
-                        break;
-
-                    case 5:
-                        apiCall.getName2(5);
-                        break;
-                    case 6:
-                        apiCall.getName2(6);
-                        break;
-                }
+                Console.WriteLine(value + "Deu erro");
+                return false;
             }
-
-            return View();
         }
 
         public IActionResult Privacy()

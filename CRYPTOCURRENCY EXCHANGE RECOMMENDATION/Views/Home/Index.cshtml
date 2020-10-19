@@ -3,19 +3,22 @@
 @{
     ViewBag.Titulo = "Home page";
 }
+@model ExchangeClass
 
 
-    <div class="text-center">
-        <h1 class="display-4">Crypto currency recomendation</h1>
-        <div>
-            @Html.DropDownList("TradeItems", null, 
-                new { onchange = "document.location.href='/Home/Index?value=' + this.value; " })
-            &nbsp;
-            @Html.DropDownList("CoinItems", null, 
-                new { onchange = "document.location.href='/Home/Index?value2=' + this.value2; " })
-        </div>
-        <div>
-            
-        </div>         
+<div class="text-center">
+    <h1 class="display-4">Crypto currency recomendation</h1>
+    <div>
+        @Html.DropDownList("TradeItems", null, new { onchange = "funcChamada(this.value);" })
+        &nbsp;
+        @Html.DropDownList("CoinItems", null, new { onchange = "" })
+        &nbsp;
     </div>
+</div>
 
+
+<script>
+    function funcChamada(valor) {
+        
+    }
+</script>
