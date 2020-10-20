@@ -5,6 +5,11 @@
     <RootNamespace>CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="IKVM" Version="8.1.5717" />
+    <PackageReference Include="Microsoft.AspNet.WebPages" Version="3.2.7" />
+  </ItemGroup>
+
 
 
 </Project>

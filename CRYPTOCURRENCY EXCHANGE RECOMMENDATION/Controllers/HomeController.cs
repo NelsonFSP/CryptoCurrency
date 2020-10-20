@@ -8,6 +8,8 @@ using Microsoft.Extensions.Logging;
 using CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Controllers.Requisitions;
+using javax.jws;
+using System.Web.Helpers;
 
 namespace CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Controllers
 {
@@ -23,36 +25,55 @@ namespace CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index(string? value)
+        public IActionResult Index()//string value)
         {
             ViewBag.TradeItems = new SelectList(exchangeClass.ListItems().AsEnumerable());
             ViewBag.CoinItems = new SelectList(exchangeClass.ListItems());
 
             
 
-            if (value != null){
-                Chamada(value);
-            }
-            else
-            {
-                Chamada(null);
-            }
+            //if (value != null){
+              //  Chamada(value);
+            //}
+            //else
+            //{
+            //   Chamada(null);
+            //}
             return View();
         }
 
-        [Microsoft.JSInterop.JSInvokable]
-        public static bool Chamada(string value)
+        [HttpPost]
+        public JsonResult ChamadaTrade(String valor)
         {
-            if (value != null)
+
+            if (valor != null)
             {
-                Console.WriteLine(value + "Sucesso");
-                return true;
+                //Console.WriteLine(valor + "Sucesso");
+                var saida = valor + " Sucesso";
+                return Json(saida);
             }
             else
             {
-                Console.WriteLine(value + "Deu erro");
-                return false;
+                var saida = "falha";
+                return Json(saida);
             }
+        }
+
+        [WebMethod]
+        public ActionResult ChamadaCoin(string valor)
+        {
+            string saida;
+            if (valor != null)
+            {
+                //Console.WriteLine(valor + "Sucesso");
+                saida = valor + "Sucesso";
+            }
+            else
+            {
+                saida = "falha";
+            }
+
+            return View();
         }
 
         public IActionResult Privacy()

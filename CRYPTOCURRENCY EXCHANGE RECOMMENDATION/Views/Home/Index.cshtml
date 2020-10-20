@@ -5,20 +5,47 @@
 }
 @model ExchangeClass
 
-
 <div class="text-center">
     <h1 class="display-4">Crypto currency recomendation</h1>
     <div>
-        @Html.DropDownList("TradeItems", null, new { onchange = "funcChamada(this.value);" })
+        @Html.DropDownList("TradeItems", null, new { onchange = "funcChamada1();" })
         &nbsp;
-        @Html.DropDownList("CoinItems", null, new { onchange = "" })
+        @Html.DropDownList("CoinItems", null, new { onchange = "funcChamada2()" })
         &nbsp;
     </div>
 </div>
-
-
 <script>
-    function funcChamada(valor) {
-        
+    function funcChamada1() {
+        $("#TradeItems").ready(function () {
+            var val = $("#TradeItems").val();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ChamadaTrade")',
+                data: { valor: val },
+                success: function (result) {
+                    console.log(result);
+                },
+                error: function (result) {
+                    console.log("erro");
+                }
+            });
+        });
     }
+    function funcChamada2() {
+        $("#CoinItems").ready(function () {
+            var val = $("#CoinItems").val();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("ChamadaCoin")',
+                data: { valor: val },
+                success: function (result) {
+                    console.log(result);
+                },
+                error: function (result) {
+                    console.log("erro");
+                }
+            });
+        });
+    }
+   
 </script>
