@@ -48,7 +48,6 @@ namespace CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Controllers
 
             if (valor != null)
             {
-                //Console.WriteLine(valor + "Sucesso");
                 var saida = valor + " Sucesso";
                 return Json(saida);
             }
@@ -59,24 +58,28 @@ namespace CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Controllers
             }
         }
 
-        [WebMethod]
+        [HttpPost]
         public ActionResult ChamadaCoin(string valor)
         {
-            string saida;
             if (valor != null)
             {
-                //Console.WriteLine(valor + "Sucesso");
-                saida = valor + "Sucesso";
+                var saida = valor + " Sucesso";
+                return Json(saida);
             }
             else
             {
-                saida = "falha";
+                var saida = "falha";
+                return Json(saida);
             }
-
-            return View();
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> Index()
+        {
+            List<Data> reservationList = new List<Data>();
+
+        }
+
+            public IActionResult Privacy()
         {
             return View();
         }
