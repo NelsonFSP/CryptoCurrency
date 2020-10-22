@@ -1,32 +1,46 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Models
 {
     public class Data
     {  
-        public string id { get; set; }
-        public string symbol { get; set; }
-        public string name { get; set; }
-        public string nameid { get; set; }
-        public int rank { get; set; }
-        public string price_usd { get; set; }
-        public string percent_change_24h { get; set; }
-        public string percent_change_1h { get; set; }
-        public string percent_change_7d { get; set; }
-        public string price_btc { get; set; }
-        public string market_cap_usd { get; set; }
-        public double volume24 { get; set; }
-        public double volume24a { get; set; }
-        public string csupply { get; set; }
-        public string tsupply { get; set; }
-        public string msupply { get; set; }
+        [JsonProperty ("id")]
+        public string Id { get; set; }
+        [JsonProperty("symbol")]
+        public string Symbol { get; set; }
+        [JsonProperty("name")]
+        public string Name { get; set; }
+        [JsonProperty("nameid")]
+        public string Nameid { get; set; }
+        [JsonProperty("rank")]
+        public int Rank { get; set; }
+        [JsonProperty("price_usd")]
+        public string Price_usd { get; set; }
+        [JsonProperty("percent_change_24h")]
+        public string Percent_change_24h { get; set; }
+        [JsonProperty("percent_change_1h")]
+        public string Percent_change_1h { get; set; }
+        [JsonProperty("percent_change_7d")]
+        public string Percent_change_7d { get; set; }
+        [JsonProperty("price_btc")]
+        public string Price_btc { get; set; }
+        [JsonProperty("market_cap_usd")]
+        public string Market_cap_usd { get; set; }
+        [JsonProperty("volume24")]
+        public double Volume24 { get; set; }
+        [JsonProperty("volume24a")]
+        public double Volume24a { get; set; }
+        [JsonProperty("csupply")]
+        public string Csupply { get; set; }
+        [JsonProperty("tsupply")]
+        public string Tsupply { get; set; }
+        [JsonProperty("msupply")]
+        public string Msupply { get; set; }
     }
 
     public class Root
     {
-        public List<Data> data { get; set; }
+        public List<Data> Data { get; set; }
     }
 }

@@ -8,14 +8,13 @@ using Microsoft.Extensions.Logging;
 using CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Controllers.Requisitions;
-using javax.jws;
-using System.Web.Helpers;
+using CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Services;
 
 namespace CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Controllers
 {
     public class HomeController : Controller
     {
-        public APICall apiCall = new APICall();
+        public APICalling apiCall = new APICalling();
         public ExchangeClass exchangeClass = new ExchangeClass();
         
         private readonly ILogger<HomeController> _logger;
@@ -29,26 +28,15 @@ namespace CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Controllers
         {
             ViewBag.TradeItems = new SelectList(exchangeClass.ListItems().AsEnumerable());
             ViewBag.CoinItems = new SelectList(exchangeClass.ListItems());
-
-            
-
-            //if (value != null){
-              //  Chamada(value);
-            //}
-            //else
-            //{
-            //   Chamada(null);
-            //}
             return View();
         }
 
         [HttpPost]
         public JsonResult ChamadaTrade(String valor)
         {
-
             if (valor != null)
             {
-                var saida = valor + " Sucesso";
+                var saida = APICalling.Call();
                 return Json(saida);
             }
             else
@@ -73,10 +61,10 @@ namespace CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Controllers
             }
         }
 
-        public async Task<IActionResult> Index()
+        public ActionResult <IActionResult> ExchangeData()
         {
             List<Data> reservationList = new List<Data>();
-
+            return View(reservationList);
         }
 
             public IActionResult Privacy()
