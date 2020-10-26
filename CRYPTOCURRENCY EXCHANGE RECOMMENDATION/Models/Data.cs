@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Models
@@ -37,6 +38,11 @@ namespace CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Models
         public string Tsupply { get; set; }
         [JsonProperty("msupply")]
         public string Msupply { get; set; }
+
+        public static implicit operator string(Data v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class Root

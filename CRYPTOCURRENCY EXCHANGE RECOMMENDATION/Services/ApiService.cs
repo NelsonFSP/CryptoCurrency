@@ -9,7 +9,7 @@ namespace CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Services
 {
     public interface IApiService
     {
-        [Get("/api/tickers/")]
+        [Get("")]
         Task<Data> GetDataAssync();
     }
 }

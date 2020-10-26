@@ -63,8 +63,8 @@ namespace CRYPTOCURRENCY_EXCHANGE_RECOMMENDATION.Controllers
 
         public ActionResult <IActionResult> ExchangeData()
         {
-            List<Data> reservationList = new List<Data>();
-            return View(reservationList);
+            List<Data> reservateList = new List<Data>();
+            return View(reservateList);
         }
 
             public IActionResult Privacy()
